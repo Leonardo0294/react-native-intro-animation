@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 const { height } = Dimensions.get('window');
 
 export default function App() {
-
+  // Valores compartidos para las animaciones
   const titleY = useSharedValue(-100); 
-  const backgroundColor = useSharedValue('blue'); 
+  const backgroundColor = useSharedValue('blue');
   const titleOpacity = useSharedValue(1); 
 
   // Efecto para animar el título al cargar la pantalla
-  useEffect(() => {
-    titleY.value = withTiming(0, { duration: 1000 }); 
+  React.useEffect(() => {
+    titleY.value = withTiming(0, { duration: 1000 }); // Deslizar desde arriba
   }, []);
 
-
+  // Estilo animado para el título
   const animatedTitleStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: titleY.value }],
@@ -23,13 +23,14 @@ export default function App() {
     };
   });
 
+  // Estilo para el fondo de pantalla
   const animatedBackgroundStyle = useAnimatedStyle(() => {
     return {
       backgroundColor: backgroundColor.value,
     };
   });
 
-//boton iniciar
+  // Evento para el botón Inicar
   const handleStart = () => {
     // Animaciones cuando se presiona el botón
     backgroundColor.value = withTiming('purple', { duration: 1000 }); 
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 18,
     color: 'blue',
   },
 });
